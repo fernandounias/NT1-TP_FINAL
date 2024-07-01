@@ -4,6 +4,7 @@
     {
         public string Nombre { get; set; }
         public int CantindadPlazasVehiculos { get; set; }
+        public 
 
     }
 }
