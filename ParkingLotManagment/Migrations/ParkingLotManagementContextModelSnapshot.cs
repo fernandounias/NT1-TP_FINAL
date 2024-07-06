@@ -33,6 +33,9 @@ namespace ParkingLotManagment.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid>("EstacionamientoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("FechaAlta")
                         .HasColumnType("datetime2");
 
@@ -59,6 +62,8 @@ namespace ParkingLotManagment.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EstacionamientoId");
 
                     b.ToTable("Administradores");
                 });
@@ -113,10 +118,18 @@ namespace ParkingLotManagment.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("MaxPlazas")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoDeVehiculos")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -210,6 +223,17 @@ namespace ParkingLotManagment.Migrations
                     b.HasIndex("EstacionamientoId");
 
                     b.ToTable("Vehiculos");
+                });
+
+            modelBuilder.Entity("ParkingLotManagment.Models.Administador", b =>
+                {
+                    b.HasOne("ParkingLotManagment.Models.Estacionamiento", "Estacionamiento")
+                        .WithMany()
+                        .HasForeignKey("EstacionamientoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estacionamiento");
                 });
 
             modelBuilder.Entity("ParkingLotManagment.Models.Ticket", b =>

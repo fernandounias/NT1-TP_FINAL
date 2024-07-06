@@ -12,24 +12,6 @@ namespace ParkingLotManagment.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Administradores",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Legajo = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    FechaAlta = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FechaUltimoAcceso = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Administradores", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Clientes",
                 columns: table => new
                 {
@@ -54,7 +36,9 @@ namespace ParkingLotManagment.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaxPlazas = table.Column<int>(type: "int", nullable: false)
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaxPlazas = table.Column<int>(type: "int", nullable: false),
+                    TipoDeVehiculos = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,6 +58,31 @@ namespace ParkingLotManagment.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Planes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Administradores",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Legajo = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
+                    EstacionamientoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    FechaAlta = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaUltimoAcceso = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Administradores", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Administradores_Estacionamientos_EstacionamientoId",
+                        column: x => x.EstacionamientoId,
+                        principalTable: "Estacionamientos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,6 +132,11 @@ namespace ParkingLotManagment.Migrations
                         principalTable: "Vehiculos",
                         principalColumn: "Patente");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Administradores_EstacionamientoId",
+                table: "Administradores",
+                column: "EstacionamientoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_VehiculoPatente",
