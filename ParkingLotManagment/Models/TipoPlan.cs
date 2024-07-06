@@ -2,9 +2,8 @@
 {
     public enum TipoPlan
     {
-     Horas,
-     Dias,
-     Mes
-    
+        Horas,
+        Dias,
+        Mes
     }
 }
