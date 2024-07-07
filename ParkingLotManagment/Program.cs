@@ -1,7 +1,21 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ParkingLotManagment.DataBase;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//se agrega authentication
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie( options => 
+    {
+        //se agrega tiempo de expiración de la cookie
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        //si la cookie es usada el tiempo de expiración se reinicia
+        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/Accesos/NoAutorizado";
+        options.LoginPath= "/Accesos/Login";
+        options.LogoutPath= "/Accesos/Logout";
+    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -39,6 +53,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -46,3 +61,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+//para uso del temp data
+app.UseCookiePolicy();
+

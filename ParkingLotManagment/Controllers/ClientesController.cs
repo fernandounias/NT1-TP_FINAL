@@ -57,7 +57,7 @@ namespace ParkingLotManagment.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         /*public async Task<IActionResult> Create([Bind("FechaDeNacimiento,Dni,Id,Nombre,Apellido,Username")] Cliente cliente)*/
-        public async Task<IActionResult> Create([Bind("FechaDeNacimiento,Dni,Id,Nombre,Apellido,Username")] Cliente cliente, string pass)
+        public async Task<IActionResult> Create(Cliente cliente, string pass)
         {
             try
             {

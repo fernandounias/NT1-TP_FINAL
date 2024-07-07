@@ -63,3 +63,11 @@ input {
     justify-content: end;
     gap: 10px;
 }
+#registerPart2 {
+    /*display: none*/
+}
+.hidden {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+}
