@@ -4,23 +4,75 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <p>Esto de abajo es temporal solo para pruebas.</p>
 
-    <div><a asp-area="" asp-controller="Tickets" asp-action="Index">Index Tickets</a></div>
-    <div><a asp-area="" asp-controller="Tickets" asp-action="Details">Details Tickets</a></div>
-    <div><a asp-area="" asp-controller="Tickets" asp-action="Create">Create Tickets</a></div>
-    <div><a asp-area="" asp-controller="Tickets" asp-action="Edit">Edit Tickets</a></div>
-    <div><a asp-area="" asp-controller="Tickets" asp-action="Delete">Delete Tickets</a></div>
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-primary">
+            <a class="text-light" asp-area="" asp-controller="Tickets" asp-action="Index">Tickets</a>
+        </button>
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" asp-area="" asp-controller="Tickets" asp-action="Create">Create</a>
+                <!--  -->
+                <a class="dropdown-item" asp-area="" asp-controller="Tickets" asp-action="Details">Details</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Tickets" asp-action="Edit">Edit</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Tickets" asp-action="Delete">Delete</a>
+            </div>
+        </div>
+    </div>
 
-    <div><a asp-area="" asp-controller="Clientes" asp-action="Index">Index Clientes</a></div>
-    <div><a asp-area="" asp-controller="Clientes" asp-action="Details">Details Clientes</a></div>
-    <div><a asp-area="" asp-controller="Clientes" asp-action="Create">Create Clientes</a></div>
-    <div><a asp-area="" asp-controller="Clientes" asp-action="Edit">Edit Clientes</a></div>
-    <div><a asp-area="" asp-controller="Clientes" asp-action="Delete">Delete Clientes</a></div>
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-primary">
+            <a class="text-light" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
+        </button>
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" asp-area="" asp-controller="Clientes" asp-action="Create">Create</a>
+                <!--  -->
+                <a class="dropdown-item" asp-area="" asp-controller="Clientes" asp-action="Details">Details</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Clientes" asp-action="Edit">Edit</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Clientes" asp-action="Delete">Delete</a>
+            </div>
+        </div>
+    </div>
 
-    <div><a asp-area="" asp-controller="Vehiculos" asp-action="Index">Index Vehiculos</a></div>
-    <div><a asp-area="" asp-controller="Vehiculos" asp-action="Details">Details Vehiculos</a></div>
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-primary">
+            <a class="text-light" asp-area="" asp-controller="Vehiculos" asp-action="Index">Vehiculos</a>
+        </button>
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" asp-area="" asp-controller="Vehiculos" asp-action="Create">Create</a>
+                <!--  -->
+                <a class="dropdown-item" asp-area="" asp-controller="Vehiculos" asp-action="Details">Details</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Vehiculos" asp-action="Edit">Edit</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Vehiculos" asp-action="Delete">Delete</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-primary">
+            <a class="text-light" asp-area="" asp-controller="Administradores" asp-action="Index">Administradores</a>
+        </button>
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" asp-area="" asp-controller="Administradores" asp-action="Create">Create</a>
+                <!--  -->
+                <a class="dropdown-item" asp-area="" asp-controller="Administradores" asp-action="Details">Details</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Administradores" asp-action="Edit">Edit</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Administradores" asp-action="Delete">Delete</a>
+            </div>
+        </div>
+    </div>
+    
+    @* <div><a asp-area="" asp-controller="Vehiculos" asp-action="Index">Index Vehiculos</a></div> *@
+    @* <div><a asp-area="" asp-controller="Vehiculos" asp-action="Details">Details Vehiculos</a></div>
     <div><a asp-area="" asp-controller="Vehiculos" asp-action="Create">Create Vehiculos</a></div>
     <div><a asp-area="" asp-controller="Vehiculos" asp-action="Edit">Edit Vehiculos</a></div>
-    <div><a asp-area="" asp-controller="Vehiculos" asp-action="Delete">Delete Vehiculos</a></div>
+    <div><a asp-area="" asp-controller="Vehiculos" asp-action="Delete">Delete Vehiculos</a></div> *@
 </div>

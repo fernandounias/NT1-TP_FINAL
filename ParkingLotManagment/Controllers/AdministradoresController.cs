@@ -10,11 +10,11 @@ using ParkingLotManagment.Models;
 
 namespace ParkingLotManagment.Controllers
 {
-    public class AdministadoresController : Controller
+    public class AdministradoresController : Controller
     {
         private readonly ParkingLotManagementContext _context;
 
-        public AdministadoresController(ParkingLotManagementContext context)
+        public AdministradoresController(ParkingLotManagementContext context)
         {
             _context = context;
         }
@@ -54,7 +54,7 @@ namespace ParkingLotManagment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Legajo,Id,Nombre,Apellido,Username")] Administador administador)
+        public async Task<IActionResult> Create([Bind("Legajo,Id,Nombre,Apellido,Username")] Administrador administador)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace ParkingLotManagment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Legajo,Id,Nombre,Apellido,Username")] Administador administador)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Legajo,Id,Nombre,Apellido,Username")] Administrador administador)
         {
             if (id != administador.Id)
             {

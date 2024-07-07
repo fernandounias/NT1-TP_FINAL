@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client.Extensibility;
 using ParkingLotManagment.DataBase;
+using ParkingLotManagment.Extensions;
 using ParkingLotManagment.Models;
 
 namespace ParkingLotManagment.Controllers
@@ -54,11 +56,23 @@ namespace ParkingLotManagment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FechaDeNacimiento,Dni,Id,Nombre,Apellido,Username")] Cliente cliente)
+        /*public async Task<IActionResult> Create([Bind("FechaDeNacimiento,Dni,Id,Nombre,Apellido,Username")] Cliente cliente)*/
+        public async Task<IActionResult> Create([Bind("FechaDeNacimiento,Dni,Id,Nombre,Apellido,Username")] Cliente cliente, string pass)
         {
+            try
+            {
+                pass.ValidatePassword();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(nameof(Cliente.Password), ex.Message);
+            }
+
             if (ModelState.IsValid)
             {
                 cliente.Id = Guid.NewGuid();
+                cliente.Password = pass.Encript();
+                cliente.FechaAlta = DateTime.Now;
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

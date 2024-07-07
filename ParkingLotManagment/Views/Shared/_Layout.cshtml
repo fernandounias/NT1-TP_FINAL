@@ -27,32 +27,34 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-2 w-25">
-                        @{
-                          <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                          </li>
-                          <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                          </li>
-                        }
+                    @{
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Estacionamientos</a>
+                              <a class="nav-link text-light" asp-area="" asp-controller="Estacionamiento" asp-action="Index">Estacionamientos</a>
                         </li>
+                        <li class="nav-item">
+                              <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Agrega tu estacionamiento</a>
+                        </li>
+                        if(false)
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Tus Tickets</a>
+                        </li>
+                        }
+                    }
                     </ul>
 
                     <form class="d-flex w-25">
-                        <label class="label-search">
-                            <input class="form-control me-sm-2" type="search" placeholder="Buscar">
+                        <label class="label-search w-100">
+                            <input class="form-control me-sm-2" type="search" placeholder="Buscar" disabled>
                         </label>
                         @* <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> *@
                     </form>
                     <ul b-5udnc8lv76="" class="navbar-nav ">
-
                         <li b-5udnc8lv76="" class="nav-item">
-                            <a class="nav-link text-light" href="/Home/Privacy">Registrarse</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Clientes" asp-action="Create">Registrarse</a>
                         </li>
                         <li b-5udnc8lv76="" class="nav-item">
-                            <a class="nav-link text-light" href="/">Iniciar Sesión</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Clientes" asp-action="Create">Iniciar Sesión</a>
                         </li>
                     </ul>
                 </div>

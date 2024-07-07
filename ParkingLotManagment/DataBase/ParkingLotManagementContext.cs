@@ -39,7 +39,7 @@ namespace ParkingLotManagment.DataBase
         public DbSet<Vehiculo> Vehiculos { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Administador> Administradores { get; set; }
+        public DbSet<Administrador> Administradores { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

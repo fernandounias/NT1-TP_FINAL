@@ -2,7 +2,7 @@
 
 namespace ParkingLotManagment.Models
 {
-    public class Administador : Usuario
+    public class Administrador : Usuario
     {
         [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "N° de Legajo")]

@@ -12,7 +12,7 @@ using ParkingLotManagment.DataBase;
 namespace ParkingLotManagment.Migrations
 {
     [DbContext(typeof(ParkingLotManagementContext))]
-    [Migration("20240706182323_InicialCreate")]
+    [Migration("20240707004708_InicialCreate")]
     partial class InicialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace ParkingLotManagment.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ParkingLotManagment.Models.Administador", b =>
+            modelBuilder.Entity("ParkingLotManagment.Models.Administrador", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,7 +228,7 @@ namespace ParkingLotManagment.Migrations
                     b.ToTable("Vehiculos");
                 });
 
-            modelBuilder.Entity("ParkingLotManagment.Models.Administador", b =>
+            modelBuilder.Entity("ParkingLotManagment.Models.Administrador", b =>
                 {
                     b.HasOne("ParkingLotManagment.Models.Estacionamiento", "Estacionamiento")
                         .WithMany()
