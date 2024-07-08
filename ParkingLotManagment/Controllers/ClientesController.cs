@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client.Extensibility;
+using Microsoft.IdentityModel.Tokens;
 using ParkingLotManagment.DataBase;
 using ParkingLotManagment.Extensions;
 using ParkingLotManagment.Models;
@@ -62,20 +65,33 @@ namespace ParkingLotManagment.Controllers
             try
             {
                 pass.ValidatePassword();
+                cliente.Password = pass.Encript();
+                if (!ModelState.IsValid) ModelState.Remove(nameof(Usuario.Password));
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(nameof(Cliente.Password), ex.Message);
             }
 
+            cliente.Vehiculos = [];
+
+            if (!ModelState.IsValid) ModelState.Remove(nameof(Cliente.Vehiculos));
+            
             if (ModelState.IsValid)
             {
                 cliente.Id = Guid.NewGuid();
-                cliente.Password = pass.Encript();
+                //cliente.Password = pass.Encript();
+
                 cliente.FechaAlta = DateTime.Now;
+                //
+                //ModelState.SetModelValue(nameof(Usuario.Password), new ValueProviderResult(cliente.Password));
+                //ModelState.Add(cliente.Password);
+                //ModelState.AddModelError(nameof(Cliente.Password), "Contraseña requerida");
+
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction(nameof(Details), new { id = cliente.Id });
             }
             return View(cliente);
         }

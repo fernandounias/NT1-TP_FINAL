@@ -13,19 +13,20 @@ namespace ParkingLotManagment.Controllers
     public class VehiculosController : Controller
     {
         private readonly ParkingLotManagementContext _context;
+        private const string _Client_Id = "ClientId";
 
         public VehiculosController(ParkingLotManagementContext context)
         {
             _context = context;
         }
 
-        // GET: Vehiculoes
+        // GET: Vehiculos
         public async Task<IActionResult> Index()
         {
             return View(await _context.Vehiculos.ToListAsync());
         }
 
-        // GET: Vehiculoes/Details/5
+        // GET: Vehiculos/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -44,24 +45,56 @@ namespace ParkingLotManagment.Controllers
         }
 
         // GET: Vehiculoes/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(string id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            TempData[_Client_Id] = id;
+
+            var id2 = id;
+            var i = _context.Clientes;
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.Id.Equals(id));
+            var cliente = await _context.Clientes.Find(id);
+            
+            if (cliente == null)
+            {
+                return NotFound();
+            }
             return View();
         }
 
-        // POST: Vehiculoes/Create
+        // POST: Vehiculos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Patente,Marca,Modelo,TipoDeVehiculo")] Vehiculo vehiculo)
+        public async Task<IActionResult> Create(Vehiculo vehiculo)
         {
+            string clientId = TempData[_Client_Id] as string;
+
             if (ModelState.IsValid)
             {
+                var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.Id.Equals(clientId));
+                if (cliente != null)
+                {
+                    cliente.Vehiculos.Add(vehiculo);
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index), "Home");
+                }
+                /*var vehiculosList= cliente.Vehiculos.ToList();
+                vehiculosList.Add(vehiculo);
+                cliente.Vehiculos = vehiculosList.ToArray();*/
                 _context.Add(vehiculo);
+
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+            TempData[_Client_Id] = clientId;
             return View(vehiculo);
         }
 
@@ -81,7 +114,7 @@ namespace ParkingLotManagment.Controllers
             return View(vehiculo);
         }
 
-        // POST: Vehiculoes/Edit/5
+        // POST: Vehiculos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
