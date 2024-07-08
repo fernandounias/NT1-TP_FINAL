@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -18,7 +19,8 @@ namespace ParkingLotManagment.Controllers
     public class ClientesController : Controller
     {
         private readonly ParkingLotManagementContext _context;
-
+        private readonly SignInManager<Cliente> _signInManager;
+        private readonly UserManager<Cliente> _userManager;
         public ClientesController(ParkingLotManagementContext context)
         {
             _context = context;
@@ -184,5 +186,20 @@ namespace ParkingLotManagment.Controllers
         {
             return _context.Clientes.Any(e => e.Id == id);
         }
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home"); // Redirige a la página principal o donde necesites
+                }
+                ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos");
+            }
+            return View(model);
+        }
+
     }
 }

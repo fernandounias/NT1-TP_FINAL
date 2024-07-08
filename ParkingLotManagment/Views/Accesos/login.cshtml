@@ -1,0 +1,37 @@
+﻿@model ParkingLotManagment.Models.Usuario
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="~/css/styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form asp-action="Login" method="post">
+            <div>
+                <label asp-for="Username">Usuario:</label>
+                <input asp-for="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Password">Contraseña:</label>
+                <input asp-for="Password" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <button type="submit">Ingresar</button>
+        </form>
+        <div>
+            @if (ViewData.ModelState["LoginError"] != null)
+            {
+                <span class="text-danger">@ViewData.ModelState["LoginError"].Errors[0].ErrorMessage</span>
+            }
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
