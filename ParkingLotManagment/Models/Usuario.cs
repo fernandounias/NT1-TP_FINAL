@@ -11,19 +11,19 @@ namespace ParkingLotManagment.Models
         [MaxLength (50, ErrorMessage = "Maxima longitud del campo son 50 caracteres")]
         [RegularExpression(@"[a-zA-Z áéíóú]*", ErrorMessage = "Este campo solo acepta caracteres alfabéticos")]
         [Display(Name = "Nombre")]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
 
         [Required(ErrorMessage = "Este campo es requerido")]
         [MaxLength(50, ErrorMessage = "Maxima longitud del campo son 50 caracteres")]
         [RegularExpression(@"[a-zA-Z áéíóú]*", ErrorMessage = "Este campo solo acepta caracteres alfabéticos")]
         [Display(Name = "Apellido")]
-        public string Apellido { get; set; }
+        public string? Apellido { get; set; }
 
         [Required(ErrorMessage = "Este campo es requerido")]
         [MaxLength(50, ErrorMessage = "Maxima longitud del campo son 50 caracteres")]
         [RegularExpression(@"[a-zA-Z0-9áéíóú_]*", ErrorMessage = "Este campo solo acepta caracteres alfanuméricos y _")]
         [Display(Name = "Nombre de Usuario")]
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         [ScaffoldColumn(false)]
         public byte[] Password { get; set; }

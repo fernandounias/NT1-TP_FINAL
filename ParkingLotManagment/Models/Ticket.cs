@@ -19,13 +19,13 @@ namespace ParkingLotManagment.Models
 
         [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Patente")]
-        public string Patente { get; set; }
+        public string? Patente { get; set; }
 
         [Display(Name = "Tarifa")]
-        public decimal Tarifa { get; set; }
+        public decimal? Tarifa { get; set; }
 
         [Display(Name = "Moneda")]
-        public string Moneda { get; set; }
+        public string? Moneda { get; set; }
 
 
     }

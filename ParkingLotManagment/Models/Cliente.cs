@@ -13,10 +13,10 @@ namespace ParkingLotManagment.Models
         [MaxLength (9, ErrorMessage = "Maxima longitud del campo son 9 digitos")]
         [Display(Name = "Documento Nacional de Identidad")]
         [RegularExpression(@"[0-9]*", ErrorMessage = "Este campo solo acepta caracteres numéricos")]
-        public string Dni { get; set; }
+        public string? Dni { get; set; }
 
         [ScaffoldColumn(false)]
-        public List<Vehiculo> Vehiculos { get; set; }
+        public List<Vehiculo>? Vehiculos { get; set; }
 
     }
 }

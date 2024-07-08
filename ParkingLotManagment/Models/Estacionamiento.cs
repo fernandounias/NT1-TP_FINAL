@@ -10,12 +10,12 @@ namespace ParkingLotManagment.Models
         [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Nombre")]
         [RegularExpression(@"[a-zA-Z0-9áéíóú_]*", ErrorMessage = "Este campo solo acepta caracteres alfanuméricos y _")]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
 
         [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "Dirección")]
         [RegularExpression(@"[a-zA-Z0-9áéíóú_]*", ErrorMessage = "Este campo solo acepta caracteres alfanuméricos y _")]
-        public string Direccion { get; set; }
+        public string? Direccion { get; set; }
 
         [Required(ErrorMessage = "Este campo es requerido")]
         [Display(Name = "n° Máximo de Plazas")]
@@ -24,7 +24,7 @@ namespace ParkingLotManagment.Models
 
         [Display(Name = "Lista de Vehículos")]
         [ScaffoldColumn(false)]
-        public List<Vehiculo> Plazas { get; set; }
+        public List<Vehiculo>? Plazas { get; set; }
 
         [Display(Name = "Tipo de Vehículos Aceptados")]
         public List<TipoVehiculo> TipoDeVehiculos { get; set; }
