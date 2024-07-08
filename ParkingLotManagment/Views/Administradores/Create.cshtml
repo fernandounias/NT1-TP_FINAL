@@ -1,17 +1,41 @@
 ﻿@model ParkingLotManagment.Models.Administrador
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Reguistro Administrador";
 }
 
-<h1>Create</h1>
+<h1 class="col-md-6 title-register">Registra tu cuenta como Cliente</h1>
 
-<h4>Administador</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div class="row d-flex justify-content-end>
+    <div class="card border-primary col-md-6 p-0">
+        <div class="card-header"><h3 class="title-register-forum">Regristate</h3></div>
+        <div class="card-body">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div id="registerPart1">
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass" class="control-label"> Contraseña </label>
+                        <input id="pass" name="pass" type="password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass2" class="control-label"> Repetí la contraseña </label>
+                        <input id="pass2" name="pass2" type="password" class="form-control" />
+                        <span id="span4pass2" for="pass2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group btngroup-register">
+                        <a class="btn btn-secondary" href="/">Cancelar</a>
+                        <a class="btn btn-primary" id="continueButtonInRegister">Continuar</a>
+                    </div>
+                </div>
+                <div id="registerPart2" class="hidden">
             <div class="form-group">
                 <label asp-for="Legajo" class="control-label"></label>
                 <input asp-for="Legajo" class="form-control" />
@@ -32,17 +56,57 @@
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+              <div class="form-group btngroup-register">
+                 <a id="btnBackregisterPart1" class="btn btn-secondary"> Atrás </a>
+                 <input type="submit" value="Create" class="btn btn-primary" />
+             </div>
+          </div>
         </form>
     </div>
 </div>
-
+</div>
 <div>
-    <a asp-action="Index">Back to List</a>
+   
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        document.getElementById('continueButtonInRegister').addEventListener('click', function (e) {
+            e.preventDefault();
+            //document.getElementById('registerPart2').style.display = 'block';
+            document.getElementById('registerPart2').classList.remove('hidden');
+            //document.getElementById('registerPart1').style.display = 'none';
+            document.getElementById('registerPart1').classList.add('hidden');
+            //document.getElementById('btnBackregisterPart1').style.display = 'block';
+            console.log('next', 'pass', document.getElementById('pass').value)
+            console.log('next', 'pass2', document.getElementById('pass2').value)
+        });
+        document.getElementById('btnBackregisterPart1').addEventListener('click', function () {
+            //document.getElementById('registerPart2').style.display = 'none';
+            document.getElementById('registerPart2').classList.add('hidden');
+            //document.getElementById('registerPart1').style.display = 'block';
+            document.getElementById('registerPart1').classList.remove('hidden');
+
+            console.log('atras', 'pass', document.getElementById('pass').value)
+            console.log('atras', 'pass2', document.getElementById('pass2').value)
+        });
+        document.getElementById('pass2').addEventListener('blur', function () {
+            if (document.getElementById('pass').value != document.getElementById('pass2').value) {
+                if (document.getElementById('span4pass2').innerText == '') {
+                    if (document.getElementById('pass').value != '') {
+                        document.getElementById('span4pass2').innerText = 'los campos deben coincidir';
+                    }
+                } else {
+                    document.getElementById('span4pass2').innerText = 'los campos deben coincidir';
+                }
+            } else {
+                if (document.getElementById('span4pass2').innerText == 'los campos deben coincidir') {
+                    document.getElementById('span4pass2').innerText = '';
+                }
+            }
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
